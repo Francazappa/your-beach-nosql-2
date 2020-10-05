@@ -15,15 +15,17 @@ app.use(cors());
 
 
 // imported routes
-//const usersRoute = require('./routes/users');
-//const adminRoute = require('./routes/admins');
-//const lidoRoute = require('./routes/lidos');
+const ownerRoute = require('./routes/owner');
+const adminRoute = require('./routes/admin');
+const lidoRoute = require('./routes/lidos');
+const usersRoute = require('./routes/users');
 
 
 // route middlewares
-//app.use('/api/users', usersRoute);
-//app.use('/api/admins', adminRoute);
-//app.use('/api/lidos', lidoRoute);
+app.user('/api/owners', ownerRoute);
+app.use('/api/admins', adminRoute);
+app.use('/api/lidos', lidoRoute);
+app.use('/api/users', usersRoute);
 
 
 // db connection ==================================================================
