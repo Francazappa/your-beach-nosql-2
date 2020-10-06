@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
-const ownerController = require('../controllers/ownerController');
+const OwnerController = require('../controllers/OwnerController');
+const ownerController = new OwnerController();
 
 
 // get tutti owner

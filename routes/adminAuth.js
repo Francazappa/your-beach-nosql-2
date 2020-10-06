@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 //const { registerValidation, loginValidation } = require('../functions/validation');
 
-let AdminAuthController = require('../controllers/adminAuthController');
+const AdminAuthController = require('../controllers/AdminAuthController');
 const adminAuthController = new AdminAuthController();
 
 

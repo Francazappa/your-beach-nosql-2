@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
-const adminController = require('../controllers/adminController');
+const AdminController = require('../controllers/AdminController');
+const adminController = new AdminController();
 
 
 // routes per gli amministratori o i proprietari dei lidi (!= routes auth degli utenti normali)

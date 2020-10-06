@@ -4,7 +4,7 @@ const verifyToken = require('../middlewares/verifyToken');
 const isAdmin = require('../middlewares/isAdmin');
 const isOwner = require('../middlewares/isOwner');
 
-const LidoController = require('../controllers/lidoController');
+const LidoController = require('../controllers/LidoController');
 const lidoContoller = new LidoController();
 
 
@@ -32,7 +32,7 @@ router.get('/:id', verifyToken, isAdmin, async (req, res) => {
 // crea un lido
 router.post('/', verifyToken, isAdmin, isOwner, async (req, res) => {
 
-    var result = await lidoController.createNewLido();
+    var result = await lidoController.createNewLido(req.body);
     res.status(result[0]).json(result[1]);
 
 });
@@ -41,7 +41,8 @@ router.post('/', verifyToken, isAdmin, isOwner, async (req, res) => {
 // modifica/aggiorna attributi lido specifico
 router.patch('/:id'), verifyToken, isAdmin, async (req, res) => {
 
-    var result = await lidoController.updateLido(id, req.newParams);
+    //var result = await lidoController.updateLido(id, req.newParams);
+    var result = await lidoController.updateLido(id, req.body.newParams);
     res.status(result[0]).json(result[1]);
 
 }
