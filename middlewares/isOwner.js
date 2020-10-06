@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Owner = require('../model/Owner');
+const Owner = require('../models/Owner');
 
 
 async function isOwner(req, res, next){
