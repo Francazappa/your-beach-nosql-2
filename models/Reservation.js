@@ -21,7 +21,7 @@ const reservationSchema = new mongoose.Schema({
 
 });
 
-reservationSchema.plugin(AutoIncrement,  {inc_field: 'id'});
+reservationSchema.plugin(AutoIncrement,  {inc_field: 'reservationID'});
 
 
 module.exports = mongoose.model('Reservation', reservationSchema);

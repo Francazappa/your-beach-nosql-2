@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 
-const adminSchema = new mongoose.Schema({
+const ownerSchema = new mongoose.Schema({
 
     email: {
         type: String,
@@ -53,6 +53,10 @@ const adminSchema = new mongoose.Schema({
     
 
     // dati in più per il proprietario
+    isAdmin: {
+        type: Boolean,
+        default: true
+    },
 
     isOwner: {
         type: Boolean,
@@ -73,7 +77,7 @@ const adminSchema = new mongoose.Schema({
 
 });
 
-adminSchema.plugin(AutoIncrement,  {inc_field: 'id'});
+ownerSchema.plugin(AutoIncrement,  {inc_field: 'ownerID'});
 
 
-module.exports = mongoose.model('Admin', adminSchema);
+module.exports = mongoose.model('Owner', ownerSchema);

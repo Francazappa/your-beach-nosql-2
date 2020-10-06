@@ -16,7 +16,7 @@ const seatSchema = new mongoose.Schema({
 
 });
 
-seatSchema.plugin(AutoIncrement,  {inc_field: 'id'});
+seatSchema.plugin(AutoIncrement,  {inc_field: 'seatID'});
 
 
 module.exports = mongoose.model('Seat', seatSchema);

@@ -51,6 +51,11 @@ const adminSchema = new mongoose.Schema({
         default: Date.now
     },
 
+    isAdmin: {
+        type: Boolean,
+        default: true
+    },
+
     role: {
         type: String,
         required: false // da mettere a true in un futuro molto lontano
@@ -58,7 +63,7 @@ const adminSchema = new mongoose.Schema({
 
 });
 
-adminSchema.plugin(AutoIncrement,  {inc_field: 'id'}); // HEY SONO UN BUG, HEY CORREGGIMI !!! ! HEY HEY HEY ! ! ! ! ! !
+adminSchema.plugin(AutoIncrement,  {inc_field: 'adminID'});
 
 
 module.exports = mongoose.model('Admin', adminSchema);

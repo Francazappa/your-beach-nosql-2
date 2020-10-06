@@ -15,7 +15,7 @@ const s_rSchema = new mongoose.Schema({
 
 });
 
-s_rSchema.plugin(AutoIncrement,  {inc_field: 'id'});
+s_rSchema.plugin(AutoIncrement,  {inc_field: 's_rID'});
 
 // metodi (perché stanno qui, non dovrebbero stare nel controller?)
 

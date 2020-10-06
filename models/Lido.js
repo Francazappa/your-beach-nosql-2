@@ -66,7 +66,7 @@ const lidoSchema = new mongoose.Schema({
 
 });
 
-lidoSchema.plugin(AutoIncrement,  {inc_field: 'id'});
+lidoSchema.plugin(AutoIncrement,  {inc_field: 'lidoID'});
 
 
 module.exports = mongoose.model('Lido', lidoSchema);
