@@ -5,7 +5,7 @@ const isAdmin = require('../middlewares/isAdmin');
 const isOwner = require('../middlewares/isOwner');
 
 const LidoController = require('../controllers/LidoController');
-const lidoContoller = new LidoController();
+const lidocontroller = new LidoController();
 
 
 // rotte per i lidi
@@ -30,10 +30,13 @@ router.get('/:id', verifyToken, isAdmin, async (req, res) => {
 
 
 // crea un lido
-router.post('/', verifyToken, isAdmin, isOwner, async (req, res) => {
+router.post('/', async (req, res) => {
 
-    var result = await lidoController.createNewLido(req.body);
+    console.log(req.body);
+    var result = await lidocontroller.createNewLido(req.body);
     res.status(result[0]).json(result[1]);
+
+    console.log("o fuck ye");
 
 });
 
