@@ -8,7 +8,11 @@ const mongoose = require('mongoose');
 class LidoController {
 
     constructor(){}
-    
+
+    eskere(){
+        console.log("eskere");
+    }
+
 
     async getAllLidos(){
 
@@ -60,8 +64,7 @@ class LidoController {
         });
 
         const newLido = await lido.save();
-        if( ! newLido) return [500, 'SERVER ERROR: couldn\'t create a new lido'];
-
+        if( ! newLido) return [500, 'SERVER ERROR: couldn\'t save the lidozz'];
     
         return [200, 'SUCCESS: correctly registered lido [' + newLido.name + '] with id [' + newLido.lidoID + ']'];
 
