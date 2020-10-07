@@ -9,10 +9,6 @@ class LidoController {
 
     constructor(){}
 
-    eskere(){
-        console.log("eskere");
-    }
-
 
     async getAllLidos(){
 
@@ -43,6 +39,7 @@ class LidoController {
     async createNewLido(data){
 
         // data contiene il json da scrivere su db
+        
         const lido = new Lido({
 
             name: data.name,
@@ -66,14 +63,19 @@ class LidoController {
         const newLido = await lido.save();
         if( ! newLido) return [500, 'SERVER ERROR: couldn\'t save the lidozz'];
     
-        return [200, 'SUCCESS: correctly registered lido [' + newLido.name + '] with id [' + newLido.lidoID + ']'];
+        return [200, 'SUCCESS: lido [' + newLido.name + '] corretly registered'];
 
     }
 
 
-    async updateLido(data){
+    async updateLido(id, data){
 
-        // data contiene il json con i singoli campi da aggiornare/riscrivere riguardo un singolo lido
+        // data contiene il json con i singoli campi da aggiornare riguardo un singolo lido
+
+        const updatedLido = await Lido.findOneAndUpdate({lidoID: id}, data);
+        if( ! updatedLido) return [500, 'SERVER ERROR: couldn\'t update lido with id [' + id + ']'];
+
+        return [200, 'SUCCESS: lido [' + updatedLido.name + '] correctly updated'];
 
     }
 

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// IMPLEMENTA
 const verifyToken = require('../middlewares/verifyToken');
 const isAdmin = require('../middlewares/isAdmin');
 const isOwner = require('../middlewares/isOwner');
@@ -11,50 +12,57 @@ const lidocontroller = new LidoController();
 // rotte per i lidi
 
 
-// getta tutti i lidi
-router.get('/', verifyToken, isAdmin, async (req, res) => {
+// getta tutti i lidi | OK
+router.get('/', async (req, res) => {
 
-    var result = await lidoController.getAllLidos();
+    var result = await lidocontroller.getAllLidos();
     res.status(result[0]).json(result[1]);
 
 });
 
 
-// getta un lido specifico
-router.get('/:id', verifyToken, isAdmin, async (req, res) => {
+// getta un lido specifico | OK
+router.get('/:id', async (req, res) => {
 
-    var result = await lidoController.getLido(req.params.id);
+    var result = await lidocontroller.getLido(req.params.id);
     res.status(result[0]).json(result[1]);
 
 });
 
 
-// crea un lido
+// crea un lido | OK
 router.post('/', async (req, res) => {
 
-    console.log(req.body);
     var result = await lidocontroller.createNewLido(req.body);
     res.status(result[0]).json(result[1]);
 
-    console.log("o fuck ye");
+});
+
+
+// modifica/aggiorna attributi lido specifico | OK
+router.patch('/:id', async (req, res) => {
+
+    console.log(req.params.id);
+    console.log(req.body);
+
+    var result = await lidocontroller.updateLido(req.params.id, req.body);
+    res.status(result[0]).json(result[1]);
 
 });
 
 
-// modifica/aggiorna attributi lido specifico
-router.patch('/:id'), verifyToken, isAdmin, async (req, res) => {
+// elimina lido specifico | OK
+router.delete('/:id', async (req, res) => {
 
-    //var result = await lidoController.updateLido(id, req.newParams);
-    var result = await lidoController.updateLido(id, req.body.newParams);
+    var result = await lidocontroller.deleteLido(req.params.id);
     res.status(result[0]).json(result[1]);
 
-}
+});
 
+// drop tabella lidos | 
+router.delete('/', async (req, res) => {
 
-// elimina lido specifico
-router.delete('/:id', verifyToken, isAdmin, isOwner, async (req, res) => {
-
-    var result = await lidoController.deleteLido(req.params.id);
+    var result = await lidocontroller.deleteAllLidos();
     res.status(result[0]).json(result[1]);
 
 });
