@@ -52,7 +52,10 @@ const ownerSchema = new mongoose.Schema({
     },
     
 
+
     // dati in più per il proprietario
+
+
     isAdmin: {
         type: Boolean,
         default: true
@@ -64,15 +67,24 @@ const ownerSchema = new mongoose.Schema({
         required: true
     },
 
-    codiceFiscale: {
+    // codice fiscale
+    fiscalCode: {
         type: String,
+        min: 16,
+        max: 16,
         required: true
     },
 
-    partitaIva: {
+    // partita iva
+    vatNumber: {
         type: String,
+        min: 11,
+        max: 11,
         required: true
-    }
+    },
+
+    // id dei lidi che il proprietario possiede -> ?
+    ownedLidos: [Number]
 
 
 });

@@ -17,47 +17,51 @@ const lidoSchema = new mongoose.Schema({
 
     lat: Number,
 
-    openingMonth:{
+    openingMonth: {
         type: Number,
+        min: 1,
+        max: 12,
         default: 1
     },
 
-    closingMonth:{
+    closingMonth: {
         type: Number,
+        min: 1,
+        max: 12,
         default: 12
     },
 
-    allowDog:{
+    allowDog: {
         type: Boolean,
         default: false
     },
 
-    hasBar:{
+    hasBar: {
         type: Boolean,
         default: false
     },
 
-    hasRestaurant:{
+    hasRestaurant: {
         type: Boolean,
         default: false
     },
 
-    hasLifeguard:{
+    hasLifeguard: {
         type: Boolean,
         default: false
     },
 
-    hasDisabledServices:{
+    hasDisabledServices: {
         type: Boolean,
         default: false
     },
 
-    hasPlayground:{
+    hasPlayground: {
         type: Boolean,
         default: false
     },
 
-    hasWiFi:{
+    hasWiFi: {
         type: Boolean,
         default: false
     },
@@ -68,5 +72,5 @@ const lidoSchema = new mongoose.Schema({
 
 lidoSchema.plugin(AutoIncrement,  {inc_field: 'lidoID'});
 
-
+module.exports = lidoSchema;
 module.exports = mongoose.model('Lido', lidoSchema);

@@ -1,5 +1,5 @@
-const Admin = require('../models/Admin');
 const mongoose = require('mongoose');
+const Admin = require('../models/Admin');
 
 class AdminController {
 
@@ -30,6 +30,18 @@ class AdminController {
         }catch{
             return [500, 'SERVER ERROR: couldn\'t get admin'];
         }
+
+    }
+
+        // get admin specifico
+    async createNewAdmin(){
+
+        /**
+         * 
+         * 
+         * login ipsum porco dius amet
+         * 
+         */
 
     }
 

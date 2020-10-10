@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 
-// getta un lido specifico | OK
+// getta un lido specifico | OK | basic info per uomi
 router.get('/:id', async (req, res) => {
 
     var result = await lidocontroller.getLido(req.params.id);
@@ -29,26 +29,42 @@ router.get('/:id', async (req, res) => {
 
 });
 
-
-// crea un lido | OK
+// ==========================================================================================
+// crea un lido | da spostare in adminAuthController o no? | OK
 router.post('/', async (req, res) => {
-
+    
     var result = await lidocontroller.createNewLido(req.body);
     res.status(result[0]).json(result[1]);
-
+    
 });
 
 
 // modifica/aggiorna attributi lido specifico | OK
+/**
+ * 
+ * uomino qui nel body della chiamata metti solo 
+ * i campi che vuoi aggiornare, tipo:
+ * 
+ * {
+ * 
+ *      allowdog: true,
+ *      hasBar: false,
+ *          .
+ *          .
+ *          .
+ * 
+ * }
+ * 
+ * e lo invii ez
+ * 
+ */
 router.patch('/:id', async (req, res) => {
-
-    console.log(req.params.id);
-    console.log(req.body);
-
+    
     var result = await lidocontroller.updateLido(req.params.id, req.body);
     res.status(result[0]).json(result[1]);
-
+    
 });
+// ==========================================================================================
 
 
 // elimina lido specifico | OK
@@ -59,7 +75,7 @@ router.delete('/:id', async (req, res) => {
 
 });
 
-// drop tabella lidos | 
+// drop tabella lidos | OK-
 router.delete('/', async (req, res) => {
 
     var result = await lidocontroller.deleteAllLidos();

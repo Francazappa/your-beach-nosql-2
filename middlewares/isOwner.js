@@ -4,8 +4,8 @@ const Owner = require('../models/Owner');
 
 async function isOwner(req, res, next){
 
-    const decoded = jwt.decode(req.header('auth-token'), process.env.TOKEN_SECRET);
-    const maybeOwner = await Owner.findOne({id: decoded.id});
+    const decoded = jwt.decode(req.header('Authorization'), process.env.TOKEN_SECRET);
+    const maybeOwner = await Owner.findOne({ownerID: decoded.id});
 
     req.decoded = decoded;
 

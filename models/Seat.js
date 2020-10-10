@@ -1,22 +1,29 @@
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
+const Lido = require('./Lido');
+
 
 const seatSchema = new mongoose.Schema({
 
-    row:{
+    row: {
         type: String,
         required: true
     },
     
-    column:{
+    column: {
         type: Number,
         required: true
+    },
+
+    lido: {
+        type: Lido,
+        required:true
     }
 
 });
 
 seatSchema.plugin(AutoIncrement,  {inc_field: 'seatID'});
 
-
-module.exports = mongoose.model('Seat', seatSchema);
+module.exports = seatSchema;
+//module.exports = mongoose.model('Seat', seatSchema);

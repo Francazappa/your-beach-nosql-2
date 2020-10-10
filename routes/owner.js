@@ -1,13 +1,18 @@
 const router = require('express').Router();
 
+// IMPLEMENTA
+const verifyToken = require('../middlewares/verifyToken');
+const isAdmin = require('../middlewares/isAdmin');
+const isOwner = require('../middlewares/isOwner');
+
 const OwnerController = require('../controllers/OwnerController');
-const ownerController = new OwnerController();
+const ownercontroller = new OwnerController();
 
 
 // get tutti owner
 router.get('/', async (req, res) => {
 
-    var result = await ownerController.getAllOwners();
+    var result = await ownercontroller.getAllOwners();
     res.status(result[0]).json(result[1]);
 
 });
@@ -16,7 +21,16 @@ router.get('/', async (req, res) => {
 // get owner specifico tramite id
 router.get('/:id', async (req, res) => {
 
-    var result = await ownerController.getOwner(req.params.id);
+    var result = await ownercontroller.getOwner(req.params.id);
+    res.status(result[0]).json(result[1]);
+
+});
+
+
+// da spostare o eliminare
+router.post('/', async (req, res) => {
+
+    var result = await ownercontroller.createNewOwner(req.body);
     res.status(result[0]).json(result[1]);
 
 });
@@ -25,7 +39,7 @@ router.get('/:id', async (req, res) => {
 // delete owner specifico
 router.delete('/:id', async (req, res) => {
 
-    var result = await ownerController.deleteOwner(req.params.id);
+    var result = await ownercontroller.deleteOwner(req.params.id);
     res.status(result[0]).json(result[1]);
 
 });
@@ -34,7 +48,7 @@ router.delete('/:id', async (req, res) => {
 // drop tabella owner
 router.delete('/', async (req, res) => {
 
-    var result = await ownerdController.deleteAllOwners();
+    var result = await ownercontroller.deleteAllOwners();
     res.status(result[0]).json(result[1]);
 
 });

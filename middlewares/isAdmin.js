@@ -1,12 +1,11 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const Admin = require('../models/Admin');
 
 
 async function isAdmin(req, res, next){
 
-    // rinominare auth-token? | loginToken magari?
-    const decoded = jwt.decode(req.header('auth-token'), process.env.TOKEN_SECRET);
-    const maybeAdmin = await User.findOne({userID: decoded.userID});
+    const decoded = jwt.decode(req.header('Authorization'), process.env.TOKEN_SECRET);
+    const maybeAdmin = await Admin.findOne({adminID: decoded.adminID}); // mmmm e se la chiamata la fa un user o un owner?
 
     req.decoded = decoded;
 

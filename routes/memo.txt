@@ -1,0 +1,5 @@
+ok molto probabilmente non servono le rotte crud asmr rest per ogni entità nel db. MA SERVE UN CONTROLLER PER OGNI ENTITA'
+poi nelle rotte espongo solamente quello che mi serve, sennò sarebbe come mettere tutto a public su java e non ha senso.
+
+oppure basta solamente mettere un middleware in maniera tale da renderle private e comunque mantenere tutte le operazioni di
+lettura e scrittura sulle entità che esistono a db?

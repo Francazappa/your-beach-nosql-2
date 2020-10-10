@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
+const User = require('./User');
+
 
 const reservationSchema = new mongoose.Schema({
 
@@ -9,8 +11,14 @@ const reservationSchema = new mongoose.Schema({
         required: true
     },
 
-    end_date:{
+    end_date: {
         type: Date,
+        required: true
+    },
+
+    // utente che ha prenotato
+    user: {
+        type: User,
         required: true
     },
 
@@ -23,5 +31,5 @@ const reservationSchema = new mongoose.Schema({
 
 reservationSchema.plugin(AutoIncrement,  {inc_field: 'reservationID'});
 
-
-module.exports = mongoose.model('Reservation', reservationSchema);
+module.exports = reservationSchema;
+//module.exports = mongoose.model('Reservation', reservationSchema);
