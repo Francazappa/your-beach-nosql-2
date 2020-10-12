@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const User = require('../models/User');
 
-const { body } = require('express-validator/check');
+//const { body } = require('express-validator/check');
+const { body } = require('express-validator');
 
 const AdminController = require('../controllers/AdminController');
 const admincontroller = new AdminController();
@@ -18,8 +20,6 @@ const UserController = require('../controllers/UserController');
 const usercontroller = new UserController();
 
 
-// IMPLEMENTARE ASSOLUTAMENTE IL CONTROLLO DELLA SINTASSI PRIMA DI OGNI CHIAMATA AI CONTROLLER !!!!!!!!!!!!!
-
 
 // registrazione admin
 router.post('/adminRegister', async (req, res) => {
@@ -30,8 +30,8 @@ router.post('/adminRegister', async (req, res) => {
 });
 
 
-// registrazione proprietario e lido
 /**
+ * registrazione proprietario e lido (contemporaneamente)
  * 
  * il req.body in arrivo dal frontend di amministrazione contiene due json: owner e lido.
  * 
@@ -60,57 +60,50 @@ router.post('/ownerRegister', async (req, res) => {
 });
 
 
-// login (sia per admin che per proprietario)
+// login sia per admin sia per proprietario | rinomina l'endpoint per favore
 router.post('/adminOwnerLogin', async (req, res) => {
 
-
+    /**
+     * 
+     * TODO
+     * 
+     */
 
 });
 
 
 /**
- * 
- * Login per l'utente dell'app android.
- * 
- * Di mattia, usa express validator per il controllo dell'input,
+ * endpoint per la registrazione di un nuovo utente dall'app android
  * 
  * il frontend da telefono invia un json "fromDevice" con tutti i dati necessari
  * il backend rosponde con un json "toDevice"
  * 
- */
-router.post('/signup', 
-[
-    body('fromDevice.email')
-    .isEmail()
-    .withMessage('Inserire un indirizzo email valido')
-    .custom((value, { req }) => {
-        return User.findOne({email: value}).then(user => {
-            if (user) {
-                return Promise.reject('Questo indirizzo email è gia stato registrato');
-            }
-        });
-    })
-    .normalizeEmail(),
-    body('fromDevice.password').trim().isLength({min: 5}).withMessage("La password deve essere lunga almeno 5 caratteri"),
-    body('fromDevice.name').trim().not().isEmpty().withMessage("Il nome non può essere vuoto"),
-    body('fromDevice.lastname').trim().not().isEmpty().withMessage("Il cognome non può essere vuoto")
-], usercontroller.userRegister);
+ * I CONTROLLI SULLA CORRETTEZZA DELLA SINSTASSI SONO EFFETTUATI ANCHE SUL FRONTEND
+ * 
+ * funziona ma non c'è l'errore fatto bene come quello di mattia
+ * -> emula con joi e via
+*/
+router.post('/signup', async(req, res) => {
+
+    var result = await usercontroller.createNewUser(req.body.fromDevice);
+    res.status(result[0]).json({toDevice: result[1]});
+
+});
+
 
 
 /**
+ * endpoint per il login di un utente dall'app android
  * 
- * Di mattia
- * 
+ * funziona ma non c'è l'errore fatto bene come quello di mattia
+ * -> emula con joi e via
  */
-router.post('/login',
-[
-    body('fromDevice.email')
-    .isEmail()
-    .withMessage('Inserire un indirizzo email valido')
-    .normalizeEmail()
-    .not().isEmpty(),
-    body('fromDevice.password').trim().not().isEmpty()
-], authcontroller.userLogin);
+router.post('/login', async(req, res) => {
+
+    var result = await authcontroller.userLogin(req.body.fromDevice);
+    res.status(result[0]).json({toDevice: result[1]});
+
+});
 
 
 module.exports = router;

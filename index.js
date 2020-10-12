@@ -15,16 +15,22 @@ app.use(cors());
 
 
 // imported routes
-const ownerRoute = require('./routes/owner');
-//const adminRoute = require('./routes/admin');
-const lidoRoute = require('./routes/lido');
+const authRoutes = require('./routes/auth');
 
+/*
+const ownerRoutes = require('./routes/owner');
+const adminRoutes = require('./routes/admin');
+const lidoRoutes = require('./routes/lido');
+*/
 
 // route middlewares
-app.use('/api/owners', ownerRoute);
-//app.use('/api/admins', adminRoute);
-app.use('/api/lidi', lidoRoute);
+app.use('/auth', authRoutes);
 
+/*
+app.use('/api/owners', ownerRoutes);
+app.use('/api/admins', adminRoutes);
+app.use('/api/lidi', lidoRoutes);
+*/
 
 // db connection ==================================================================
 mongoose.connect(

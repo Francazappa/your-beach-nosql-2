@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Admin = require('../models/Admin');
 
+
 class AdminController {
 
     constructor(){}
@@ -33,15 +34,30 @@ class AdminController {
 
     }
 
-        // get admin specifico
+
+    // crea nuovo admin
     async createNewAdmin(){
 
-        /**
-         * 
-         * 
-         * login ipsum porco dius amet
-         * 
-         */
+        const salt = await bcrypt.genSalt(12);
+        const hashedPassword  = await bcrypt.hash(data.password, salt);
+
+        const admin = new Admin({
+
+            email: data.email,
+            password: hashedPassword,
+            name: data.name,
+            lastname: data.lastname,
+            province: data.province,
+            birthday: data.birthday,
+            isValidated: data.isValidated,
+            isAdmin: data.isAdmin
+            
+        });
+
+        const newAdmin = await admin.save();
+        if( ! newAdmin) return [500, 'SERVER ERROR: couldn\'t create new admin'];
+    
+        return [200, 'SUCCESS: admin [' + newAdmin.name + '] corretly created'];
 
     }
 
